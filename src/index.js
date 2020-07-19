@@ -112,7 +112,7 @@ export default class IPut extends React.Component {
    */
   onPropsChange() {
     const { value } = this.state;
-    const ip = value.map(val => isNaN(val) ? '' : val).join('.');
+    const ip = value.map(val => isNaN(val) ? '0' : val).join('.');
     return this.props.onChange(ip);
   }
 
@@ -132,11 +132,14 @@ export default class IPut extends React.Component {
           <div className="react-ip-input__item" key={i}>
             <input
               ref={el => this[`_input-${i}`] = el}
-              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*[.]*"
+              type="tel"
               value={isNaN(val) ? '' : val}
               onChange={e => this.handleChange(e, i)}
               onKeyDown={e => this.handleKeyDown(e, i)}
               onPaste={e => this.handlePaste(e, i)}
+              onFocus={e => e.target.select()}
             />
             {i !== 3 ? <i>.</i> : false}
           </div>
