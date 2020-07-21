@@ -11,7 +11,8 @@ export default class IPut extends React.Component {
     className: '',
     defaultValue: '...',
     isError: () => false,
-    onChange: new Function()
+    onChange: new Function(),
+    readOnly: false,
   }
   /**
    * set prop type
@@ -20,7 +21,8 @@ export default class IPut extends React.Component {
     className: PropTypes.string,
     defaultValue: PropTypes.string || PropTypes.array,
     isError: PropTypes.func,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    readOnly: PropTypes.bool,
   }
   /**
    * default state value
@@ -140,6 +142,7 @@ export default class IPut extends React.Component {
               onKeyDown={e => this.handleKeyDown(e, i)}
               onPaste={e => this.handlePaste(e, i)}
               onFocus={e => e.target.select()}
+              disabled={this.props.readOnly}
             />
             {i !== 3 ? <i>.</i> : false}
           </div>
